@@ -1,13 +1,13 @@
-<nav class="ui inverted menu">
-    <header class="header item"><a href="/"> Donation </a></header>
-    <div class="right menu">
-        <a id="home"   class= "item" href="/home"> Donate</a>
-        <a id="report" class= "item" href="/report"> Report</a>
-        <a id="settings" class= "item" href="/settings"> Settings</a>
-        <a id="logout" class= "item" href="/logout"> Logout</a>
-    </div>
-</nav>
+{{> welcomemenu }}
 
-<script>
-    $("#{{_id}}").addClass("active item");
-</script>
+<section class="ui stacked segment">
+    <div class="ui grid">
+        <aside class="six wide column">
+            <img src="images/homer.png" class="ui medium image">
+        </aside>
+        <article class="ten wide column">
+            <header class="ui  header"> Help Me Run Springfield</header>
+            <p> Donate what you can now - No Bitcoins accepted! </p>
+        </article>
+    </div>
+</section>

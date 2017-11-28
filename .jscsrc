@@ -83,6 +83,8 @@
     "allExcept": ["urlComments"]
   },
   "excludeFiles": [
-    "./app/controllers/donations.js"
+    "./app/controllers/tweets.js",
+    "./app/models/db.js",
+    "./app/models/tweet.js"
   ]
 }

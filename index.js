@@ -1,4 +1,3 @@
-
 'use strict';
 
 const Hapi = require('hapi');
@@ -6,12 +5,7 @@ const Hapi = require('hapi');
 var server = new Hapi.Server();
 server.connection({ port: process.env.PORT || 4000 });
 
-//server.bind({
-//  users: {},
-//  donations: [],
-//});
-require('./app/models/db');
-server.register([require('inert'), require('vision'), require('hapi-auth-cookie')], err => {
+server.register([require('inert'), require('vision')], err => {
 
   if (err) {
     throw err;
@@ -29,18 +23,6 @@ server.register([require('inert'), require('vision'), require('hapi-auth-cookie'
     isCached: false,
   });
 
-  server.auth.strategy('standard', 'cookie', {
-    password: 'secretpasswordnotrevealedtoanyone',
-    cookie: 'donation-cookie',
-    isSecure: false,
-    ttl: 24 * 60 * 60 * 1000,
-    redirectTo: '/login',
-  });
-
-  server.auth.default({
-    strategy: 'standard',
-  });
-
   server.route(require('./routes'));
 
   server.start((err) => {
@@ -50,5 +32,4 @@ server.register([require('inert'), require('vision'), require('hapi-auth-cookie'
 
     console.log('Server listening at:', server.info.uri);
   });
-
 });
