@@ -12,8 +12,8 @@ module.exports = [
   { method: 'GET', path: '/logout', config: Accounts.logout },
 
   { method: 'GET', path: '/home', config: Tweets.home },
-  { method: 'POST', path: '/donate', config: Tweets.tweets },
-
+  { method: 'POST', path: '/tweet', config: Tweets.tweets },
+  { method:  'GET',  path: '/report', config: Tweets.report },
   {
     method: 'GET',
     path: '/{param*}',

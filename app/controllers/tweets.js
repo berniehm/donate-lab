@@ -3,7 +3,7 @@
 exports.home = {
 
   handler: (request, reply) => {
-  reply.view('main', { title: 'Welcome to Twitter' });
+  reply.view('home', { title: 'Welcome to Twitter' });
 },
 
 };
@@ -28,9 +28,20 @@ exports.tweets = {
 
   handler: function (request, reply) {
     let data = request.payload;
-    data.donor = this.currentUser;
-    this.donations.push(data);
+    var tweeterEmail=request.auth.credentials.loggedInUser;
+    data.tweeter = this.users[tweeterEmail];
+    this.tweets.push(data);
     reply.redirect('/report');
+  },
+
+};
+exports.report = {
+
+  handler: function (request, reply) {
+    reply.view('report', {
+      title: 'Tweets to Date',
+      tweets: this.tweets,
+    });
   },
 
 };
