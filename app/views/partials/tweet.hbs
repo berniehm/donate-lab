@@ -1,49 +1,27 @@
-<section class="ui raised segment">
-    <div class="ui grid ">
-        <div class="ui form six wide column">
-            <div class="ui stacked segment">
-                <form action="/donate" method="POST">
-                    <div class="ui dropdown" name="amount">
-                        <input type="hidden" name="amount">
-                        <div class="text">Select Amount</div>
-                        <i class="ui dropdown icon"></i>
-                        <div class="menu">
-                            <div class="item">50</div>
-                            <div class="item">100</div>
-                            <div class="item">1000</div>
+<section class="ui inverted yellow segment">
+    <section class="ui purple raised segment">
+        <div class="ui grid">
+            <aside class="ui eight wide column">
+                <img class="ui medium centered image" src="images/twitterWeb.png">
+            </aside>
+
+            <div class="ui eight wide column">
+                <div class="ui purple raised fluid form center aligned segment">
+
+                    <form method="post" enctype="multipart/form-data" action="/maketweet">
+
+                        <div class="ui blue field">
+                            <h2 class="ui blue header"> Tweet Here</h2>
+                            <textarea placeholder="What's on your mind..." name="text" rows="4" cols="50"></textarea>
+                            <span id='remainingChars'></span>
                         </div>
-                    </div>
-                    <div class="grouped inline fields">
-                        <div class="field">
-                            <div class="ui radio checkbox">
-                                <input type="radio" name="method" value="paypal">
-                                <label>Paypal</label>
-                            </div>
-                        </div>
-                        <div class="field">
-                            <div class="ui radio checkbox">
-                                <input type="radio" name="method" value="direct">
-                                <label>Direct</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grouped inline fields">
-                        <h3> Select Contact </h3>
-                        {{#each candidates }}
-                            <div class="field">
-                                <div class="ui radio checkbox">
-                                    <input type="radio" name="candidate" value="{{lastName}},{{firstName}}">
-                                    <label>{{lastName}}, {{firstName}}</label>
-                                </div>
-                            </div>
-                        {{/each}}
-                    </div>
-                    <button class="ui blue submit button">Tweet</button>
-                </form>
+
+
+                        <button class="ui blue submit button">Tweet</button>
+                    </form>
+                    {{> formerror }}
+                </div>
             </div>
         </div>
-        <aside class="six wide column">
-            <img src="images/twitter3.jpeg" class="ui medium image">
-        </aside>
-    </div>
+    </section>
 </section>
