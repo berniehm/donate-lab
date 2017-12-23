@@ -13,7 +13,32 @@ exports.home = {
 
 };
 
+exports.signup = {
 
+  handler: (request, reply) => {
+    reply.view('signup', { title: 'Sign up for Twitter' });
+  },
+
+};
+
+exports.login = {
+
+  handler: (request, reply) => {
+    reply.view('login', { title: 'Login to Twitter' });
+  },
+
+};
+exports.tweet = {
+
+  handler: function (request, reply) {
+    let data = request.payload;
+    var tweeterEmail = request.auth.credentials.loggedInUser;
+    data.tweeter = this.users[tweeterEmail];
+    this.tweets.push(data);
+    reply.redirect('/report');
+  },
+
+};
 
 exports.report = {
 
