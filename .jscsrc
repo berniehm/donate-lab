@@ -87,6 +87,7 @@
     "./app/models/db.js",
     "./app/models/tweet.js",
     "./routes.js",
-    "./app/models/user.js"
+    "./app/models/user.js",
+    "./app/controllers/accounts.js"
   ]
 }

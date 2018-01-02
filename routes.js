@@ -1,3 +1,4 @@
+
 const Accounts = require('./app/controllers/accounts');
 const Tweets = require('./app/controllers/tweets');
 const Assets = require('./app/controllers/assets');
@@ -13,8 +14,12 @@ module.exports = [
   { method: 'GET', path: '/settings', config: Accounts.viewSettings },
   { method: 'POST', path: '/settings', config: Accounts.updateSettings },
 
-  { method: 'GET', path: '/home', config: Tweets.home },
-  { method:  'GET',  path: '/report', config: Tweets.report },
+  { method: 'GET', path: '/home', config: Tweets.newsfeed },
+  { method: 'GET', path: '/newsfeed', config: Tweets.newsfeed },
+  { method: 'GET', path: '/my', config: Tweets.my },
+
+  { method: 'POST', path: '/tweet', config: Tweets.tweet },
+
   {
     method: 'GET',
     path: '/{param*}',

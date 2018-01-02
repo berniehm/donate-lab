@@ -1,29 +1,37 @@
-<section class="ui inverted yellow segment">
-    <section class="ui purple raised segment">
-    <div class="ui grid">
-        <aside class="six wide column">
+<section class="ui raised segment">
+    <div>
 
-        </aside>
-        <article class="eight wide column">
-            <table class="ui celled table segment">
-                <thead>
-                <tr>
-                    <th>Text</th>
-                    <th>words tweeted</th>
-                    <th>Tweeter</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#each tweets}}
-                    <tr>
-                        <td> {{text}} </td>
-                        <td> {{tweeted}} </td>
-                        <td> {{tweeter.firstName}} {{tweeter.lastName}} </td>
-                    </tr>
-                {{/each}}
-                </tbody>
-            </table>
-        </article>
+
+        <h2>Tweets</h2>
+        {{#each tweets}}
+
+        <table class="ui celled table segment" style="table-layout: fixed">
+            <thead>
+            <h3>    <a href="/membertimeline/{{author.id}}"> {{author.firstName}} {{author.lastName}} </a>
+
+            </h3>
+            </thead>
+        <tbody>
+
+        <tr>
+            <td style="word-wrap: break-word"> {{body}}
+                <button class="ui red icon button" id="tweet{{tweetid}}" style="float: right;" onclick="window.location='/tweets/{{id}}/deleteTweet'"><i class="trash icon"></i></button>
+            </td>
+        </tr>
+        <tr>
+            <td> {{date}} </td>
+
+
+
+        </tr>
+
+
+        {{/each}}
+
+
+    </tbody>
+
+    </table>
+
     </div>
-</section>
 </section>

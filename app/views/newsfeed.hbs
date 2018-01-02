@@ -1,23 +1,27 @@
 <section class="ui inverted yellow segment">
     <section class="ui purple raised segment">
         <div class="ui grid">
+            <aside class="ui eight wide column">
+                <img class="ui medium centered image" src="images/twitterWeb.png">
+            </aside>
+
             <div class="ui eight wide column">
                 <div class="ui purple raised fluid form center aligned segment">
 
-                     <div class="ui blue field">
+                    <form method="post" enctype="multipart/form-data" action="/timeline">
+
+                        <div class="ui blue field">
                             <h2 class="ui blue header"> Tweet Here</h2>
                             <textarea placeholder="What's on your mind..." name="text" rows="4" cols="50"></textarea>
                             <span id='remainingChars'></span>
                         </div>
-                     <button class="ui blue submit button">Tweet</button>
+
+
+                        <button class="ui blue submit button">Tweet</button>
                     </form>
                     {{> formerror }}
                 </div>
             </div>
-        </div>
-            <aside class="six wide column">
-                <img src="images/twitterWeb.png" class="ui medium image">
-            </aside>
         </div>
     </section>
 </section>

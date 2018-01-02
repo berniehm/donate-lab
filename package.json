@@ -1,7 +1,7 @@
 {
   "name": "donation-web",
   "version": "1.0.0",
-  "description": "an application to host donations for candidates",
+  "description": "an application to host tweets for tweeters",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -1,10 +1,12 @@
 'use strict';
+
 const User = require('../models/user');
+
 
 exports.main = {
   auth: false,
   handler: function (request, reply) {
-    reply.view('main', { title: 'Welcome to Tweets' });
+    reply.view('main', { title: 'Welcome to Twitter' });
   },
 
 };
@@ -12,7 +14,7 @@ exports.main = {
 exports.signup = {
   auth: false,
   handler: function (request, reply) {
-    reply.view('signup', { title: 'Sign up for Tweets' });
+    reply.view('signup', { title: 'Sign up for Twitter' });
   },
 
 };
@@ -20,7 +22,21 @@ exports.signup = {
 exports.login = {
   auth: false,
   handler: function (request, reply) {
-    reply.view('login', { title: 'Login to Tweets' });
+    reply.view('login', { title: 'Login to Twitter' });
+  },
+
+};
+
+exports.register = {
+  auth: false,
+  handler: function (request, reply) {
+    const user = new User(request.payload);
+
+    user.save().then(newUser => {
+      reply.redirect('/login');
+    }).catch(err => {
+      reply.redirect('/');
+    });
   },
 
 };
@@ -55,19 +71,6 @@ exports.logout = {
 
 };
 
-exports.register = {
-  auth: false,
-  handler: function (request, reply) {
-    const user = new User(request.payload);
-
-    user.save().then(newUser => {
-      reply.redirect('/login');
-    }).catch(err => {
-      reply.redirect('/');
-    });
-  },
-
-};
 exports.viewSettings = {
 
   handler: function (request, reply) {

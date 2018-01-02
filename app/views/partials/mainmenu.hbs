@@ -1,18 +1,16 @@
-{{> welcomemenu }}
+<nav class="ui inverted menu">
+    <header class="header item"><a href="/"> MyTweet </a></header>
+    <div class="right menu">
+        <a id="report" class= "item" href="/newsfeed"> Newsfeed</a>
+        <a id="mine" class= "item" href="/mine"> Twitter</a>
 
-<section class="ui inverted yellow segment">
-    <section class="ui purple raised segment">
-        <div class="ui grid">
+        <a id="settings" class= "item" href="/settings"> Settings</a>
 
-            <aside class="eight wide column">
-                <img class="ui big image" src="images/twitterWeb.png">
-            </aside>
+        <a id="logout" class= "item" href="/logout"> Logout</a>
 
-            <article class="eight wide center aligned column">
-                <header class="ui red header"> Welcome to Twitter</header>
-                <p> Tweet till your beaks content </p>
-            </article>
+    </div>
+</nav>
 
-        </div>
-    </section>
-</section>
+<script>
+    $("#{{_id}}").addClass("active item");
+</script>
