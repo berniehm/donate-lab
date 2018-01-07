@@ -76,20 +76,71 @@ exports.tweet = {
 
 
 
+exports.makeTweet = {
+  validate: {
+
+    payload: {
+      text: Joi.string().min(1).max(140).required(),
+      picture: Joi.any().required(),
+    },
+
+    failAction: function (request, reply, source, error) {
+      Tweet.find({}).then(tweets => {
+        reply.view('tweet', {
+          title: 'Invalid Tweet',
+          tweets: tweets,
+          errors: error.data.details,
+        }).code(400);
+      }).catch(err => {
+        reply.redirect('/');
+      });
+    },
+  },
+
+  handler: function (request, reply) {
+    const loggedInUser = request.auth.credentials.loggedInUser;
+    let tweetData = request.payload;
+
+    User.findOne({ email: loggedInUser }).then(user => {
+
+
+      tweetData.date = new Date();
+
+
+      // setting image for tweet
+      tweetData.tweeter = user.id;
+      if ((tweetData.text !== '') || ("'")) {
+        const tweet = new Tweet(tweetData);
+        if (tweetData.string.length) {
+          ;
+          ;
+        }
+
+        return tweet.save();
+      }
+    }).then(newTweet => {
+      console.log(`>> Tweet sent by: ` + loggedInUser);
+      reply.redirect('/');
+    }).catch(err => {
+      console.log(err);
+      reply.redirect('/timeline');
+    });
+  },
+}
 
 
 exports.my = {
 
   handler: function (request, reply) {
 
-    var userEmail = request.auth.credentials.loggedInUser;
+    let userEmail = request.auth.credentials.loggedInUser;
 
     if (userEmail === 'marge@simpson.com') {
       User.findOne({email: userEmail}).then(foundUser => {
 
 
         Tweet.find({author: foundUser.id}).populate('author').then(allTweets => {
-          reply.view('adminmine', {
+          reply.view('', {
             title: 'Tweets',
             tweets: allTweets,
           });
@@ -105,7 +156,7 @@ exports.my = {
 
         Tweet.find({author: foundUser.id}).populate('author').then(allTweets => {
 
-          reply.view('mine', {
+          reply.view('my', {
             title: 'My Tweets',
             tweets: allTweets,
           });

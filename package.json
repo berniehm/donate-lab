@@ -1,14 +1,16 @@
 {
-  "name": "donation-web",
+  "name": "tweet-web",
   "version": "1.0.0",
   "description": "an application to host tweets for tweeters",
   "main": "index.js",
   "scripts": {
+    "start": "node index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "boom": "^7.1.1",
     "handlebars": "^4.0.11",
     "hapi": "^14.1.0",
     "hapi-auth-cookie": "^7.0.0",
