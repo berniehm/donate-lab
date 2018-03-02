@@ -1,8 +1,16 @@
-<section class="ui inverted teal segment">
-    <section class="ui yellow raised segment">
-        <div class="ui grid">
+{{> mainmenu _id="tweetlist" }}
+<section class="ui raised segment">
+    <div>
+        {{> mainmenu _id="timeline" }}
+        <section class="ui inverted teal segment">
+            <section class="ui yellow raised segment">
+                <div class="ui grid">
 
-         <h3 class="ui center aligned header">Your Profile {{user.firstName}}</h3>
-        </div>
-    </section>
-</section>
+                    <h3 class="ui center aligned header">Your Profile {{user.firstName}}</h3>
+
+                </div>
+            </section>
+
+
+
+            
