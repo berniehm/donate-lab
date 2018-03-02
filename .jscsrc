@@ -89,6 +89,9 @@
     "./routes.js",
     "./app/models/user.js",
     "./app/controllers/accounts.js",
-    "./routesapi.js"
+    "./routesapi.js",
+    "./app/api/tweetsapi.js",
+    "./app/api/utils.js",
+    "./index.js"
   ]
 }

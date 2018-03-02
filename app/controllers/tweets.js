@@ -5,6 +5,21 @@ const Joi = require('joi');
 
 
 
+exports.timeline = {
+
+  handler: function (request, reply) {
+    Tweet.find({}).populate('tweeter').then(allTweets => {
+      reply.view('timeline', {
+        title: 'Tweets to Date',
+        tweets: allTweets,
+      });
+    }).catch(err => {
+      reply.redirect('/timeline');
+    });
+  },
+
+};
+
 
 exports.newsfeed = {
 
@@ -30,48 +45,22 @@ exports.newsfeed = {
 };
 
 exports.tweet = {
-  validate: {
-
-    payload: {
-
-      body: Joi.string().min(2).required(),
-      date: Joi.string().required(),
-    },
-
-    failAction: function (request, reply, source, error) {
-      reply.view('tweet', {
-        title: 'Sign up error',
-        errors: error.data.details,
-      }).code(400);
-    },
-
-  },
 
   handler: function (request, reply) {
     var userEmail = request.auth.credentials.loggedInUser;
     User.findOne({ email: userEmail }).then(user => {
       let data = request.payload;
       const tweet = new Tweet(data);
-      tweet.author = user._id;
+      tweet.tweeter = user._id;
       return tweet.save();
     }).then(newTweet => {
-      if (userEmail === 'marge@simpson.com'){
-        reply.redirect('/admin');
-      }
-      else {
-        reply.redirect('/tweet');
-      }
-      console.log("Saving tweet from " + userEmail + newTweet)
-
+      reply.redirect('/report');
     }).catch(err => {
-      console.log(err);
-      reply.redirect('/');
+      reply.redirect('/timeline');
     });
   },
 
 };
-
-
 
 
 
@@ -81,7 +70,6 @@ exports.makeTweet = {
 
     payload: {
       text: Joi.string().min(1).max(140).required(),
-      picture: Joi.any().required(),
     },
 
     failAction: function (request, reply, source, error) {
@@ -92,7 +80,7 @@ exports.makeTweet = {
           errors: error.data.details,
         }).code(400);
       }).catch(err => {
-        reply.redirect('/');
+        reply.redirect('/timeline');
       });
     },
   },
@@ -107,12 +95,12 @@ exports.makeTweet = {
       tweetData.date = new Date();
 
 
-      // setting image for tweet
+
       tweetData.tweeter = user.id;
       if ((tweetData.text !== '') || ("'")) {
         const tweet = new Tweet(tweetData);
-        if (tweetData.string.length) {
-          ;
+        if (tweetData.text.length) {
+         ;
           ;
         }
 
