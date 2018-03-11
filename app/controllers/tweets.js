@@ -38,7 +38,7 @@ exports.newsfeed = {
         });
         console.log("Show timeline for " + userEmail)
       }).catch(err => {
-        reply.redirect('/');
+        reply.redirect('/timeline');
       });
     })
   },
@@ -54,9 +54,9 @@ exports.tweet = {
       tweet.tweeter = user._id;
       return tweet.save();
     }).then(newTweet => {
-      reply.redirect('/report');
-    }).catch(err => {
       reply.redirect('/timeline');
+    }).catch(err => {
+      reply.redirect('/');
     });
   },
 
@@ -100,7 +100,7 @@ exports.makeTweet = {
       if ((tweetData.text !== '') || ("'")) {
         const tweet = new Tweet(tweetData);
         if (tweetData.text.length) {
-         ;
+          ;
           ;
         }
 
@@ -108,10 +108,10 @@ exports.makeTweet = {
       }
     }).then(newTweet => {
       console.log(`>> Tweet sent by: ` + loggedInUser);
-      reply.redirect('/');
+      reply.redirect('/timeline');
     }).catch(err => {
       console.log(err);
-      reply.redirect('/timeline');
+      reply.redirect('/newsfeed');
     });
   },
 }
@@ -157,4 +157,3 @@ exports.my = {
   }
 
 };
-

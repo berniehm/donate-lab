@@ -24,7 +24,6 @@ server.register([require('inert'), require('vision'), require('hapi-auth-cookie'
     layout: true,
     isCached: false,
   });
-
   server.auth.strategy('standard', 'cookie', {
     password: 'secretpasswordnotrevealedtoanyone',
     cookie: 'tweet-cookie',
