@@ -24,7 +24,7 @@
   "tweets": {
     "_model": "Tweet",
     "one": {
-      "body": "Helllo everybody",
+      "text": "Helllo everybody",
       "date": "12343343252",
       "author": "->users.homer"
 

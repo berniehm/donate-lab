@@ -1,0 +1,44 @@
+<section class="ui raised segment">
+    <section class="ui purple raised segment">
+
+    <div class="ui grid">
+
+
+
+        <h2>All your Tweets</h2>
+        {{#each tweets}}
+
+        <table class="ui celled table segment" style="table-layout: fixed">
+            <thead>
+
+                <div class="extra content">
+                    <i class="purple mail icon"></i>&nbsp;{{user.email}}<br>
+                    <i class="purple twitter icon"></i>{{userStats.posts}} post(s)<br>
+
+                </div>
+
+
+            </thead>
+        <tbody>
+
+        <tr>
+            <td style="word-wrap: break-word"> {{body}}
+
+
+            </td>
+        </tr>
+
+        <tr>
+
+
+        </tr>
+
+        {{/each}}
+
+    </tbody>
+
+    </table>
+
+    </div>
+</section>
+</section>

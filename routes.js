@@ -14,12 +14,11 @@ module.exports = [
 
 
   { method: 'GET', path: '/newsfeed', config: Tweets.newsfeed },
-  { method: 'GET', path: '/my', config: Tweets.my },
+
   { method: 'POST', path: '/maketweet', config: Tweets.makeTweet },
-  { method: 'POST', path: '/timeline', config: Tweets.timeline },
-
+  { method: 'GET', path: '/mytimeline', config: Tweets.mytimeline },
   { method: 'POST', path: '/tweet', config: Tweets.tweet },
-
+   { method:'POST', path: '/report', config: Tweets.mytimeline},
 
   {
     method: 'GET',

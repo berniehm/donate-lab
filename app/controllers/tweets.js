@@ -5,20 +5,22 @@ const Joi = require('joi');
 
 
 
-exports.timeline = {
+exports.mytimeline = {
 
-  handler: function (request, reply) {
-    Tweet.find({}).populate('tweeter').then(allTweets => {
-      reply.view('timeline', {
-        title: 'Tweets to Date',
-        tweets: allTweets,
+
+    handler: function (request, reply) {
+      Tweet.find({}).populate('author').then(allTweets => {
+        reply.view('report', {
+          title: 'tweets to Date',
+          tweets: allTweets,
+        });0
+      }).catch(err => {
+        reply.redirect('/');
+        console.log(mytimeline);
       });
-    }).catch(err => {
-      reply.redirect('/timeline');
-    });
-  },
+    },
 
-};
+  };
 
 
 exports.newsfeed = {
@@ -38,7 +40,7 @@ exports.newsfeed = {
         });
         console.log("Show timeline for " + userEmail)
       }).catch(err => {
-        reply.redirect('/timeline');
+        reply.redirect('/mytimeline');
       });
     })
   },
@@ -52,9 +54,10 @@ exports.tweet = {
       let data = request.payload;
       const tweet = new Tweet(data);
       tweet.tweeter = user._id;
+      tweet.tweeter = tweet._id;
       return tweet.save();
     }).then(newTweet => {
-      reply.redirect('/timeline');
+      reply.redirect('/mytimeline');
     }).catch(err => {
       reply.redirect('/');
     });
@@ -80,7 +83,7 @@ exports.makeTweet = {
           errors: error.data.details,
         }).code(400);
       }).catch(err => {
-        reply.redirect('/timeline');
+        reply.redirect('/mytimeline');
       });
     },
   },
@@ -108,7 +111,7 @@ exports.makeTweet = {
       }
     }).then(newTweet => {
       console.log(`>> Tweet sent by: ` + loggedInUser);
-      reply.redirect('/timeline');
+      reply.redirect('/mytimeline');
     }).catch(err => {
       console.log(err);
       reply.redirect('/newsfeed');
@@ -117,43 +120,3 @@ exports.makeTweet = {
 }
 
 
-exports.my = {
-
-  handler: function (request, reply) {
-
-    let userEmail = request.auth.credentials.loggedInUser;
-
-    if (userEmail === 'marge@simpson.com') {
-      User.findOne({email: userEmail}).then(foundUser => {
-
-
-        Tweet.find({author: foundUser.id}).populate('author').then(allTweets => {
-          reply.view('', {
-            title: 'Tweets',
-            tweets: allTweets,
-          });
-          console.log("Show tweets by " + userEmail)
-        }).catch(err => {
-          reply.redirect('/');
-        });
-      })
-    }
-    else
-    {
-      User.findOne({email: userEmail}).then(foundUser => {
-
-        Tweet.find({author: foundUser.id}).populate('author').then(allTweets => {
-
-          reply.view('my', {
-            title: 'My Tweets',
-            tweets: allTweets,
-          });
-          console.log("Show tweets by " + userEmail)
-        }).catch(err => {
-          reply.redirect('/');
-        });
-      })
-    }
-  }
-
-};
