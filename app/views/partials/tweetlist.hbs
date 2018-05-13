@@ -11,11 +11,7 @@
         <table class="ui celled table segment" style="table-layout: fixed">
             <thead>
 
-                <div class="extra content">
-                    <i class="purple mail icon"></i>&nbsp;{{user.email}}<br>
-                    <i class="purple twitter icon"></i>{{userStats.posts}} post(s)<br>
 
-                </div>
 
 
             </thead>
@@ -23,6 +19,10 @@
 
         <tr>
             <td style="word-wrap: break-word"> {{body}}
+
+                <a href="/removeTweet/{{id}}">
+                    <i class=" large red trash icon"></i>
+                </a>
 
 
             </td>
