@@ -19,7 +19,7 @@ module.exports = [
   { method: 'GET', path: '/mytimeline', config: Tweets.mytimeline },
   { method: 'POST', path: '/tweet', config: Tweets.tweet },
    { method:'POST', path: '/report', config: Tweets.mytimeline},
-
+  { method: 'POST', path: '/deletetweet', config: Tweets.deleteTweet },
   {
     method: 'GET',
     path: '/{param*}',

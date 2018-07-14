@@ -65,7 +65,19 @@ exports.tweet = {
 
 };
 
+exports.deleteTweet = {  handler: function (request, reply) {
 
+
+    tweets.forEach(function (id) {
+      Tweet.findByIdAndRemove(id, function (err) {
+        if (err) throw err;
+      });
+    });
+
+    console.log(`>> Tweet deleted`);
+    reply.redirect('/tweetlist');
+  },
+};
 
 
 exports.makeTweet = {
