@@ -1,44 +1,35 @@
+
 <section class="ui raised segment">
-    <section class="ui purple raised segment">
-
     <div class="ui grid">
+        <aside class="six wide column">
+
+        </aside>
+        <article class="eight wide column">
+            <form class="ui form"  action="/deleteTweet" method="POST">
+                <table class="ui celled table segment">
+                    <thead>
+                    <tr>
+                        <th>Tweet</th>
+
+                        <th></th>
 
 
-
-        <h2>All your Tweets</h2>
-        {{#each tweets}}
-
-        <table class="ui celled table segment" style="table-layout: fixed">
-            <thead>
-
-hey
-
-
-            </thead>
-        <tbody>
-
-        <tr>
-            <td style="word-wrap: break-word"> {{body}}
-
-                <a href="/removeTweet/{{id}}">
-                    <i class=" large red trash icon"></i>
-                </a>
-
-
-            </td>
-        </tr>
-
-        <tr>
-
-
-        </tr>
-
-        {{/each}}
-
-    </tbody>
-
-    </table>
-
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>
+                            <button  class="ui red submit icon button"> Delete
+                            </button>
+                        </th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </form>
+        </article>
     </div>
 </section>
-</section>
+
+
