@@ -73,7 +73,7 @@ exports.tweet = {
           Tweet.findByIdAndRemove(id, function (err) {
             if (err) throw err;
             console.log('Deleted id: ' + id);
-          });
+          });999999999999999
         });
 
         reply.redirect('/timeline');
@@ -117,14 +117,13 @@ exports.makeTweet = {
 
       tweetData.tweeter = user.id;
       if ((tweetData.text !== '') || ("'")) {
-        const tweet = new Tweet(tweetData);
-        if (tweetData.text.length) {
-          ;
-          ;
+        if(tweetData.text.length) {
+          tweetData.message = tweetData.text
         }
-
+        const tweet = new Tweet(tweetData);
         return tweet.save();
       }
+
     }).then(newTweet => {
       console.log(`>> Tweet sent by: ` + loggedInUser);
       reply.redirect('/mytimeline');
