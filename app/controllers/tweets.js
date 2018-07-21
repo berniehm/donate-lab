@@ -13,7 +13,7 @@ exports.mytimeline = {
         reply.view('report', {
           title: 'tweets to Date',
           tweets: allTweets,
-        });0
+        });
       }).catch(err => {
         reply.redirect('/');
         console.log(mytimeline);
@@ -73,7 +73,7 @@ exports.tweet = {
           Tweet.findByIdAndRemove(id, function (err) {
             if (err) throw err;
             console.log('Deleted id: ' + id);
-          });999999999999999
+          });
         });
 
         reply.redirect('/timeline');
