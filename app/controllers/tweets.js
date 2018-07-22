@@ -5,6 +5,7 @@ const Joi = require('joi');
 
 
 
+
 exports.mytimeline = {
 
 
@@ -57,8 +58,16 @@ exports.tweet = {
       tweet.tweeter = tweet._id;
       return tweet.save();
     }).then(newTweet => {
-      reply.redirect('/mytimeline');
+      if (userEmail === 'marge@simpson.com'){
+        reply.redirect('/admin');
+      }
+      else {
+        reply.redirect('/newsfeed');
+      }
+      console.log("Saving tweet from " + userEmail + newTweet)
+
     }).catch(err => {
+      console.log(err);
       reply.redirect('/');
     });
   },
@@ -72,7 +81,7 @@ exports.tweet = {
         tweets.forEach(function (id) {
           Tweet.findByIdAndRemove(id, function (err) {
             if (err) throw err;
-            console.log('Deleted id: ' + id);
+            console.log('Deleted tweet: ' + tweets);
           });
         });
 
@@ -128,8 +137,8 @@ exports.makeTweet = {
       console.log(`>> Tweet sent by: ` + loggedInUser);
       reply.redirect('/mytimeline');
     }).catch(err => {
-      console.log(err);
-      reply.redirect('/newsfeed');
+     /* console.log(err);*/
+      reply.redirect('/mytimeline');
     });
   },
 }

@@ -1,3 +1,4 @@
+
 const Accounts = require('./app/controllers/accounts');
 const Tweets = require('./app/controllers/tweets');
 const Assets = require('./app/controllers/assets');
@@ -18,7 +19,7 @@ module.exports = [
   { method: 'POST', path: '/maketweet', config: Tweets.makeTweet },
   { method: 'GET', path: '/mytimeline', config: Tweets.mytimeline },
   { method: 'POST', path: '/tweet', config: Tweets.tweet },
-   { method:'POST', path: '/report', config: Tweets.mytimeline},
+  { method:'POST', path: '/report', config: Tweets.mytimeline},
   { method: 'POST', path: '/deletetweet', config: Tweets.deleteTweet },
   {
     method: 'GET',
