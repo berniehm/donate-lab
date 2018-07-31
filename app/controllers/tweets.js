@@ -1,3 +1,4 @@
+
 'use strict';
 const Tweet = require('../models/tweet');
 const User = require('../models/user');
@@ -5,23 +6,23 @@ const Joi = require('joi');
 
 
 
-
 exports.mytimeline = {
 
 
-    handler: function (request, reply) {
-      Tweet.find({}).populate('author').then(allTweets => {
-        reply.view('report', {
-          title: 'tweets to Date',
-          tweets: allTweets,
-        });
-      }).catch(err => {
-        reply.redirect('/');
-        console.log(mytimeline);
+  handler: function (request, reply) {
+    Tweet.find({}).populate('author').then(allTweets => {
+      console.log(allTweets)
+      reply.view('mytimeline', {
+        title: 'tweets to Date',
+        tweets: allTweets,
       });
-    },
+    }).catch(err => {
+      reply.redirect('/');
+      console.log(mytimeline);
+    });
+  },
 
-  };
+};
 
 
 exports.newsfeed = {
@@ -58,16 +59,8 @@ exports.tweet = {
       tweet.tweeter = tweet._id;
       return tweet.save();
     }).then(newTweet => {
-      if (userEmail === 'marge@simpson.com'){
-        reply.redirect('/admin');
-      }
-      else {
-        reply.redirect('/newsfeed');
-      }
-      console.log("Saving tweet from " + userEmail + newTweet)
-
+      reply.redirect('/mytimeline');
     }).catch(err => {
-      console.log(err);
       reply.redirect('/');
     });
   },
@@ -75,20 +68,20 @@ exports.tweet = {
 };
 
 
-    exports.deleteTweet = {
-      handler: function (request, reply) {
-        const tweets = Object.keys(request.payload);
-        tweets.forEach(function (id) {
-          Tweet.findByIdAndRemove(id, function (err) {
-            if (err) throw err;
-            console.log('Deleted tweet: ' + tweets);
-          });
-        });
+exports.deleteTweet = {
+  handler: function (request, reply) {
+    const tweets = Object.keys(request.payload);
+    tweets.forEach(function (id) {
+      Tweet.findByIdAndRemove(id, function (err) {
+        if (err) throw err;
+        console.log('Deleted id: ' + id);
+      });
+    });
 
-        reply.redirect('/timeline');
+    reply.redirect('/timeline');
 
-      },
-    };
+  },
+};
 
 
 
@@ -118,29 +111,22 @@ exports.makeTweet = {
     let tweetData = request.payload;
 
     User.findOne({ email: loggedInUser }).then(user => {
-
-
       tweetData.date = new Date();
-
-
-
       tweetData.tweeter = user.id;
       if ((tweetData.text !== '') || ("'")) {
-        if(tweetData.text.length) {
+        if (tweetData.text.length) {
           tweetData.message = tweetData.text
         }
         const tweet = new Tweet(tweetData);
         return tweet.save();
       }
-
     }).then(newTweet => {
       console.log(`>> Tweet sent by: ` + loggedInUser);
       reply.redirect('/mytimeline');
     }).catch(err => {
-     /* console.log(err);*/
+      console.log(err);
       reply.redirect('/mytimeline');
     });
   },
 }
-
 

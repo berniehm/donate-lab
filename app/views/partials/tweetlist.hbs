@@ -6,7 +6,7 @@
         </aside>
         <article class="eight wide column">
             <form class="ui form"  action="/deleteTweet" method="POST">
-                <table class="ui celled table segment">
+
                     <thead>
                     {{#each tweets}}
                         <tr>
@@ -23,12 +23,11 @@
                         <th></th>
                         <th></th>
                         <th>
-                            <button  class="ui red submit icon button"> Delete
-                            </button>
+                            <button onclick = "removetweet()">Delete</button>
                         </th>
                     </tr>
                     </tfoot>
-                </table>
+
             </form>
         </article>
     </div>
