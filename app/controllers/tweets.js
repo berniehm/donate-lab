@@ -68,20 +68,23 @@ exports.tweet = {
 };
 
 
-exports.deleteTweet = {
+// user remove a tweet
+exports.userRemoveTweet = {
   handler: function (request, reply) {
     const tweets = Object.keys(request.payload);
+
     tweets.forEach(function (id) {
       Tweet.findByIdAndRemove(id, function (err) {
         if (err) throw err;
-        console.log('Deleted id: ' + id);
       });
     });
 
+    console.log(`>> Tweet removed`);
     reply.redirect('/timeline');
-
   },
 };
+
+
 
 
 
