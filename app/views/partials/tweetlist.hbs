@@ -1,6 +1,24 @@
 
 <section class="ui raised segment">
-</div class =
+    <div class="group">
+
+
+
+        <p>All your tweets</p>
+        <table frame="above">
+            <tr>
+                <th>{{#each tweets}}</th>
+
+                <th>{{message}}</th>
+
+              <th>{{date}}</th>
+
+                {{/each}}
+            </tr>
+
+
+
+    </div>
 
 
         <article class="ten wide column">
@@ -10,36 +28,16 @@
                     <tr>
                         <th>Select</th>
                         <th></th>
-                        <th>All Your Timeline Tweets</th>
+                        <th></th>
                     </tr>
                     </thead>
 
-                    <tbody class="ui segment">
 
-                    {{#each tweets}}
-                        <tr>
-                        {{message}}
-                        {{date}}
-
-                    {{/each}}
-
-
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th>
                             <!-- https://semantic-ui.com/elements/button.html -->
                             <div class="ui tiny buttons">
                                 <button class="ui positive button" id="remove_tweet"><i class="trash icon"></i>Selected
                                 </button>
-                        </th>
-                    </tr>
-                    </tfoot>
-
             </form>
-        </article>
-    </div>
+                            </article>
+                            </div>
 </section>
