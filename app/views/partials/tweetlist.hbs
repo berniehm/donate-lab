@@ -5,23 +5,35 @@
 
 
         <p>All your tweets</p>
-        <table frame="above">
+        <article class="ten wide column">
             <tr>
                 <th>{{#each tweets}}</th>
 
                 <th>{{message}}</th>
 
               <th>{{date}}</th>
+                    <div class="ui checkbox">
+                        <input type="checkbox"  class = "Checkbox1" name="{{id}}">
+                        <script>
+                            if (document.getElementsByClassName('checkbox1')[0].checked == true) {
+                                console.log('true');
 
+                            } else {
+                                console.log('false');
+                            }
+
+                        </script>
+                        <label></label>
+                    </div>
                 {{/each}}
             </tr>
 
 
-
+</article>
     </div>
 
 
-        <article class="ten wide column">
+
             <form class="ui form" action="/userremovetweet" method="POST">
 
                     <thead>
@@ -33,11 +45,19 @@
                     </thead>
 
 
+
+
                             <!-- https://semantic-ui.com/elements/button.html -->
                             <div class="ui tiny buttons">
                                 <button class="ui positive button" id="remove_tweet"><i class="trash icon"></i>Selected
                                 </button>
+
+
             </form>
                             </article>
-                            </div>
+
+    </div>
+
+
+
 </section>

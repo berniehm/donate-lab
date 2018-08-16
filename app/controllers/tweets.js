@@ -69,7 +69,7 @@ exports.tweet = {
 
 
 // user remove a tweet
-exports.userRemoveTweet = {
+exports.RemoveTweet = {
   handler: function (request, reply) {
     const tweets = Object.keys(request.payload);
 
@@ -79,8 +79,8 @@ exports.userRemoveTweet = {
       });
     });
 
-    console.log(`>> Tweet removed`);
-    reply.redirect('/timeline');
+    console.log(`>> Tweet removedd`);
+    reply.redirect('/mytimeline');
   },
 };
 
