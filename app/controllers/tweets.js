@@ -69,7 +69,7 @@ exports.tweet = {
 
 
 // user remove a tweet
-exports.RemoveTweet = {
+exports.DeleteTweet = {
   handler: function (request, reply) {
     const tweets = Object.keys(request.payload);
 
