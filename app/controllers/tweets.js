@@ -79,7 +79,7 @@ exports.RemoveTweet = {
       });
     });
 
-    console.log(`>> Tweet removedd`);
+    console.log(`>> Tweet removedd` + tweets);
     reply.redirect('/mytimeline');
   },
 };

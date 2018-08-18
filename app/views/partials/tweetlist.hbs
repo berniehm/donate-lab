@@ -1,63 +1,40 @@
 
 <section class="ui raised segment">
-    <div class="group">
-
-
-
-        <p>All your tweets</p>
-        <article class="ten wide column">
-            <tr>
+    <form class="ui form" action="/userremovetweet" method="POST">
+        <div class="group">
+            <p>All your tweets</p>
+            <article class="ten wide column">
+                <tr>
                 <th>{{#each tweets}}</th>
-
-                <th>{{message}}</th>
-
-              <th>{{date}}</th>
+                    <th>{{message}}</th>
+                    <th>{{date}}</th>
                     <div class="ui checkbox">
-                        <input type="checkbox"  class = "Checkbox12" name="{{id}}">
+                        <input type="checkbox" class="Checkbox12" name="{{id}}">
                         <script>
                             if (document.getElementsByClassName('checkbox1')[0].checked == true) {
-                                console.log('true');
-
+                                console.log('true')
                             } else {
-                                console.log('false');
+                                console.log('false')
                             }
-
                         </script>
                         <label></label>
                     </div>
                 {{/each}}
-            </tr>
-
-
-</article>
-    </div>
-
-
-
-            <form class="ui form" action="/userremovetweet" method="POST">
-
-                    <thead>
-                    <tr>
-                        <th>Select</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    </thead>
-
-
-
-
-                            <!-- https://semantic-ui.com/elements/button.html -->
-                            <div class="ui tiny buttons">
-                                <button class="ui positive button" id="remove_tweet"><i class="trash icon"></i>Selected
-                                </button>
-
-
-            </form>
-                            </article>
-
-    </div>
-
-
-
+                </tr>
+            </article>
+        </div>
+        <thead>
+        <tr>
+            <th>Select</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <!-- https://semantic-ui.com/elements/button.html -->
+        <div class="ui tiny buttons">
+            <button class="ui positive button" id="remove_tweet"><i class="trash icon"></i>Selected
+            </button>
+            </article>
+        </div>
+    </form>
 </section>
