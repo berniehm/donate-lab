@@ -84,52 +84,89 @@ exports.DeleteTweet = {
   },
 };
 
-
-
-
-
-
-exports.makeTweet = {
-  validate: {
-
-    payload: {
-      text: Joi.string().min(1).max(140).required(),
-    },
-
-    failAction: function (request, reply, source, error) {
-      Tweet.find({}).then(tweets => {
-        reply.view('tweet', {
-          title: 'Invalid Tweet',
-          tweets: tweets,
-          errors: error.data.details,
-        }).code(400);
-      }).catch(err => {
-        reply.redirect('/mytimeline');
-      });
-    },
-  },
-
+exports.viewAUser ={
   handler: function (request, reply) {
-    const loggedInUser = request.auth.credentials.loggedInUser;
-    let tweetData = request.payload;
+    let following = false;
+    let userStats = {};
 
-    User.findOne({ email: loggedInUser }).then(user => {
-      tweetData.date = new Date();
-      tweetData.tweeter = user.id;
-      if ((tweetData.text !== '') || ("'")) {
-        if (tweetData.text.length) {
-          tweetData.message = tweetData.text
-        }
-        const tweet = new Tweet(tweetData);
-        return tweet.save();
-      }
-    }).then(newTweet => {
-      console.log(`>> Tweet sent by: ` + loggedInUser);
-      reply.redirect('/mytimeline');
+    User.findOne({_id: userId}).then(user => {
+      const userId = user.id;
+
+      // https://docs.mongodb.com/manual/reference/method/cursor.count/index.html
+      Tweet.count({tweeter: userId}, function (err, tweets) {
+        userStats.posts = tweets;
+      });
+      Tweet.count({tweeter: userId}, function (err, tweets) {
+        userStats.posts = tweets;
+      });
+
+      // https://docs.mongodb.com/manual/reference/operator/aggregation/ne/index.html
+      User.find({_id: userId}).then(followedUser => {
+        Tweet.find({tweeter: userId}).populate('tweeter').sort({date: 'desc'}).then(allTweets => {
+          if (followedUser.length > 0) {
+            following = true;
+          }
+
+          reply.view('viewauser', {
+            title: 'Users Tweets',
+            tweets: allTweets,
+            user: user,
+            id: userId,
+            userStats: userStats,
+            following: following,
+            followedUser: followedUser,
+          });
+        });
+      });
     }).catch(err => {
       console.log(err);
-      reply.redirect('/mytimeline');
+      reply.redirect('/users');
     });
   },
-}
+};
+
+
+    exports.makeTweet = {
+      validate: {
+
+        payload: {
+          text: Joi.string().min(1).max(140).required(),
+        },
+
+        failAction: function (request, reply, source, error) {
+          Tweet.find({}).then(tweets => {
+            reply.view('tweet', {
+              title: 'Invalid Tweet',
+              tweets: tweets,
+              errors: error.data.details,
+            }).code(400);
+          }).catch(err => {
+            reply.redirect('/mytimeline');
+          });
+        },
+      },
+
+      handler: function (request, reply) {
+        const loggedInUser = request.auth.credentials.loggedInUser;
+        let tweetData = request.payload;
+
+        User.findOne({email: loggedInUser}).then(user => {
+          tweetData.date = new Date();
+          tweetData.tweeter = user.id;
+          if ((tweetData.text !== '') || ("'")) {
+            if (tweetData.text.length) {
+              tweetData.message = tweetData.text
+            }
+            const tweet = new Tweet(tweetData);
+            return tweet.save();
+          }
+        }).then(newTweet => {
+          console.log(`>> Tweet sent by: ` + loggedInUser);
+          reply.redirect('/mytimeline');
+        }).catch(err => {
+          console.log(err);
+          reply.redirect('/mytimeline');
+        });
+      },
+    }
 
