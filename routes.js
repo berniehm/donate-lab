@@ -21,7 +21,8 @@ module.exports = [
   { method: 'POST', path: '/tweet', config: Tweets.tweet },
   { method:'POST', path: '/report', config: Tweets.mytimeline},
   { method: 'POST', path: '/deletetweet', config: Tweets.DeleteTweet },
-  { method: 'GET', path: '/users', config: Tweets.viewAUser },
+  {  method:'GET', path: '/users', config: Tweets.User},
+
   {
     method: 'GET',
     path: '/{param*}',

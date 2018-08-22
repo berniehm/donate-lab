@@ -79,12 +79,12 @@ exports.DeleteTweet = {
       });
     });
 
-    console.log(`>> Tweet removedd` + tweets);
+    console.log(`>> Tweet gone` + tweets);
     reply.redirect('/mytimeline');
   },
 };
 
-exports.viewAUser ={
+exports.User ={
   handler: function (request, reply) {
     let following = false;
     let userStats = {};
@@ -107,7 +107,7 @@ exports.viewAUser ={
             following = true;
           }
 
-          reply.view('viewauser', {
+          reply.view('users', {
             title: 'Users Tweets',
             tweets: allTweets,
             user: user,
