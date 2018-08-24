@@ -4,13 +4,11 @@ const Tweet = require('../models/tweet');
 const User = require('../models/user');
 const Joi = require('joi');
 
-
-
 exports.mytimeline = {
 
 
   handler: function (request, reply) {
-    Tweet.find({}).populate('author').then(allTweets => {
+    Tweet.find({}).populate('tweeter').then(allTweets => {
       console.log(allTweets)
       reply.view('mytimeline', {
         title: 'tweets to Date',

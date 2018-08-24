@@ -2,12 +2,27 @@
 'use strict';
 const Tweet = require('../models/tweet');
 const Boom = require('boom');
+exports.find = {
+  auth: false,
+
+  handler: function(request, reply) {
+    Tweet.find({}).populate('tweeter')
+        .exec()
+        .then(tweets => {
+          reply(tweets);
+        })
+        .catch(err => {
+          reply(Boom.badImplementation("error accessing db"));
+        });
+  }
+};
+
 exports.findOne = {
   auth: false,
   handler: function(req, res) {
-    Tweet.findOne({_id: req.params.id}).then(tweet => {
+    Tweet.findOne({_id: req.params.id}).populate('tweeter').then(tweet => {
       if(tweet !== null){
-       res(tweet);
+        res(tweet);
       }
       res(Boom.notFound('Error finding tweet id'));
     }).catch(err => {
@@ -16,11 +31,10 @@ exports.findOne = {
   },
 };
 
-
 exports.findAll = {
   auth: false,
   handler: function(req, res) {
-    Tweet.find({}).sort({date: -1}).then(tweets => {
+    Tweet.find({}).sort({date: -1}).populate('tweeter').then(tweets => {
       res(tweets);
     }).catch(err => {
       res(Boom.badImplementation('Error accessing database: ' + err));
@@ -40,6 +54,10 @@ exports.addNewTweet = {
     });
   },
 };
+
+
+
+
 
 
 exports.deleteOne = {
@@ -78,3 +96,4 @@ exports.editTweet = {
     })
   }
 };
+
