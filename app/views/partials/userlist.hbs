@@ -1,0 +1,50 @@
+<nav class="ui inverted menu">
+    <header class="header item"> <a href="/">Twitter</a> </header>
+    <div class="right menu">
+        <a class="item" href="/signup"> Sign up</a>
+        <a class="item" href="/login">  Login</a>
+        <a class ="item" href="users">Tweeters</a>
+    </div>
+</nav>
+<section class="ui raised segment">
+    <form class="ui form" action="/deleteuser" method="POST">
+        <div class="group">
+            <img class="ui medium centered image" src="images/twitWeb.png">
+            <p>All users</p>
+            <article class="ten wide column">
+                <tr>
+                <th>{{#each users}}</th>
+                    <th>{{firstName}} {{lastName}}</th>
+
+                    <div class="ui checkbox">
+                        <input type="checkbox" class="Checkbox12" name="{{id}}">
+                        <script>
+                            if (document.getElementsByClassName('checkbox1')[0].checked == true) {
+                                console.log('true')
+                            } else {
+                                console.log('false')
+                            }
+                        </script>
+                        <label></label>
+                    </div>
+                {{/each}}
+                </tr>
+            </article>
+        </div>
+        <thead>
+        <tr>
+            <th>Select</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <!-- https://semantic-ui.com/elements/button.html -->
+
+        <div class="ui tiny buttons">
+            <button class="ui positive button" id="remove_tweet"><i class="trash icon"></i>Selected
+            </button>
+            </article>
+        </div>
+
+    </form>
+</section>

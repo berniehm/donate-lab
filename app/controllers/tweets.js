@@ -9,7 +9,7 @@ exports.mytimeline = {
 
   handler: function (request, reply) {
     Tweet.find({}).populate('tweeter').then(allTweets => {
-      console.log(allTweets)
+     // console.log(allTweets)
       reply.view('mytimeline', {
         title: 'tweets to Date',
         tweets: allTweets,
@@ -20,6 +20,37 @@ exports.mytimeline = {
     });
   },
 
+};
+
+exports.deleteUser = {
+  handler: function (request, reply) {
+    const users = Object.keys(request.payload);
+
+    users.forEach(function (id) {
+      User.findByIdAndRemove(id, function (err) {
+        if (err) throw err;
+      });
+    });
+
+    console.log(`>> user gone` + users);
+    reply.redirect('/users');
+},
+};
+
+// user remove a tweet
+exports.DeleteTweet = {
+  handler: function (request, reply) {
+    const tweets = Object.keys(request.payload);
+
+    tweets.forEach(function (id) {
+      Tweet.findByIdAndRemove(id, function (err) {
+        if (err) throw err;
+      });
+    });
+
+    console.log(`>> Tweet gone` + tweets);
+    reply.redirect('/mytimeline');
+  },
 };
 
 
@@ -66,61 +97,24 @@ exports.tweet = {
 };
 
 
-// user remove a tweet
-exports.DeleteTweet = {
+
+
+exports.users = {
+
+
   handler: function (request, reply) {
-    const tweets = Object.keys(request.payload);
-
-    tweets.forEach(function (id) {
-      Tweet.findByIdAndRemove(id, function (err) {
-        if (err) throw err;
-      });
-    });
-
-    console.log(`>> Tweet gone` + tweets);
-    reply.redirect('/mytimeline');
-  },
-};
-
-exports.User ={
-  handler: function (request, reply) {
-    let following = false;
-    let userStats = {};
-
-    User.findOne({_id: userId}).then(user => {
-      const userId = user.id;
-
-      // https://docs.mongodb.com/manual/reference/method/cursor.count/index.html
-      Tweet.count({tweeter: userId}, function (err, tweets) {
-        userStats.posts = tweets;
-      });
-      Tweet.count({tweeter: userId}, function (err, tweets) {
-        userStats.posts = tweets;
-      });
-
-      // https://docs.mongodb.com/manual/reference/operator/aggregation/ne/index.html
-      User.find({_id: userId}).then(followedUser => {
-        Tweet.find({tweeter: userId}).populate('tweeter').sort({date: 'desc'}).then(allTweets => {
-          if (followedUser.length > 0) {
-            following = true;
-          }
-
-          reply.view('users', {
-            title: 'Users Tweets',
-            tweets: allTweets,
-            user: user,
-            id: userId,
-            userStats: userStats,
-            following: following,
-            followedUser: followedUser,
-          });
-        });
+    User.find({}).populate('tweeter').then(allUsers => {
+      // console.log(allUsers)
+      reply.view('users', {
+        title: 'all users',
+        users: allUsers,
       });
     }).catch(err => {
-      console.log(err);
       reply.redirect('/users');
+      console.log("balls");
     });
   },
+
 };
 
 
