@@ -8,9 +8,7 @@ const userSchema = mongoose.Schema({
   lastName: String,
   email: String,
   password: String,
-  followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-  following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tweet' }],
+
 
 });
 

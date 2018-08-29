@@ -3,19 +3,8 @@
 
 {{> welcomemenu }}
 
-<script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
-<script>
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyCf0uGF7WW8GZ6hetTnLBAH1IT0YZADgsA",
-        authDomain: "mytwitterweb.firebaseapp.com",
-        databaseURL: "https://mytwitterweb.firebaseio.com",
-        projectId: "mytwitterweb",
-        storageBucket: "mytwitterweb.appspot.com",
-        messagingSenderId: "1006074317181"
-    };
-    firebase.initializeApp(config);
-</script>
+
+
 <section class="ui raised segment">
     <form class="ui form" action="/deleteuser" method="POST">
         <div class="group">
@@ -42,22 +31,11 @@
             </article>
         </div>
 
-        <!-- Import and configure the Firebase SDK -->
-        <!-- These scripts are made available when the app is served or deployed on Firebase Hosting -->
-        <!-- If you do not serve/host your project using Firebase Hosting see https://firebase.google.com/docs/web/setup -->
-        <script src="/__/firebase/5.4.1/firebase-app.js"></script>
-        <script src="/__/firebase/5.4.1/firebase-auth.js"></script>
-        <script src="/__/firebase/5.4.1/firebase-database.js"></script>
-        <script src="/__/firebase/init.js"></script>
-
-        <script src="scripts/main.js"></script>
-        </body>
-
 
         <!-- https://semantic-ui.com/elements/button.html --->
 
         <div class="ui tiny buttons">
-            <button class="ui positive button" id="remove_tweet"><i class="trash icon"></i>Selected
+            <button class="ui positive button" id="remove_tweet"><i class="trash icon"></i>Delete
             </button>
             </article>
         </div>

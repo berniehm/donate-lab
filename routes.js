@@ -14,7 +14,7 @@ module.exports = [
 
 
 
-  { method: 'GET', path: '/newsfeed', config: Tweets.newsfeed },
+  { method: 'GET', path: '/homepage', config: Tweets.homepage },
 
   { method: 'POST', path: '/maketweet', config: Tweets.makeTweet },
   { method: 'GET', path: '/mytimeline', config: Tweets.mytimeline },

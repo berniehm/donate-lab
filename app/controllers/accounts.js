@@ -54,7 +54,7 @@ exports.register = {
     user.save().then(newUser => {
       reply.redirect('/login');
     }).catch(err => {
-      reply.redirect('/newsfeed');
+      reply.redirect('/homepage');
     });
   },
 
@@ -71,7 +71,7 @@ exports.authenticate = {
           loggedIn: true,
           loggedInUser: user.email,
         });
-        reply.redirect('/newsfeed');
+        reply.redirect('/homepage');
       } else {
         reply.redirect('/signup');
       }

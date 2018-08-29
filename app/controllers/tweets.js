@@ -54,7 +54,7 @@ exports.DeleteTweet = {
 };
 
 
-exports.newsfeed = {
+exports.homepage = {
 
   handler: function (request, reply) {
 
@@ -64,8 +64,8 @@ exports.newsfeed = {
       Tweet.find({}).populate('author').populate('user').then(allTweets => {
 
 
-        reply.view('newsfeed', {
-          title: 'Newsfeed',
+        reply.view('homepage', {
+          title: 'Homepage',
           tweets: allTweets,
           user: foundUser
         });
