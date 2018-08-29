@@ -153,7 +153,7 @@ exports.users = {
             return tweet.save();
           }
         }).then(newTweet => {
-          console.log(`>> Tweet sent by: ` + loggedInUser);
+          console.log(`>>  A Tweet sent by: ` + loggedInUser);
           reply.redirect('/mytimeline');
         }).catch(err => {
           console.log(err);
